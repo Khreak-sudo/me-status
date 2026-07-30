@@ -209,8 +209,15 @@
   /* MARKETING */
   .empty{
     background:var(--paper-card); border:1px dashed var(--line); border-radius:14px;
-    padding:18px; font-size:13.5px; color:var(--ink-soft);
+    padding:14px 16px; font-size:13.5px; color:var(--ink-soft);
   }
+  .hypo-card{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:14px;
+    padding:12px 14px; margin-top:10px;
+  }
+  .hypo-title{font-weight:600; font-size:13.5px; margin-bottom:6px; color:var(--petrol-deep);}
+  .hypo-text{font-size:12.5px; line-height:1.5; color:var(--ink-soft); margin-top:4px;}
+  .hypo-text b{color:var(--ink); font-weight:600;}
 
   footer{margin-top:30px; font-size:11.5px; color:var(--ink-soft); text-align:center;}
 </style>
@@ -286,20 +293,20 @@
 const IGOR_PHOTO = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADIAMgDASIAAhEBAxEB/8QAHQAAAAcBAQEAAAAAAAAAAAAAAAIDBAUGBwEICf/EAEEQAAEDAgQDBQUFBgUEAwAAAAEAAgMEEQUSITEGQVEHEyJhcRQkMoGRFSNCobEIJVJywdEzQ1Ni8BeC4fGDouL/xAAaAQADAQEBAQAAAAAAAAAAAAABAgMEAAUG/8QAKBEAAgICAwACAgIDAAMAAAAAAAECEQMhBBIxIkEFE1FxFCMyBlJh/9oADAMBAAIRAxEAPwD1a0o4OuqRaczQeqOCvLaTNSbFvAdwjBwA0CQRh5oKKDbFA7VGa8JNAJ6QLFS8FcLuiIu2ROO38kdqTC6iAUdbkilczaargc0uIB23XHUGXLIZgBuu3CNgoAFl1BBdYaBbyXCjWXCF1nUFXQuEIDRCzqD2QAXW6ow1K6zghCFkciy4hYQhaTyQS0bgN0EVQtkVT/4LPRKBI05+4Z6JQOUkx6DowRA5GBRs6g4XbIoK7dGzqDXQuuBA6LrBR3miyPDGlx2GpVS7VeN6HgLhCqx2qhNS6OzIadrw0yvOwudhzJ6BeOe0ztv4z4qe6nkqzRUkm1JRuLI2jld27j5n6IpSl4NS+z1dx/2w8I8JVbaKpqpKuqLSTFTBr8vS5JAB8lh8/wC0jjVPxYa11JHJh3dlraVpyAa6Xdrc6HXz2Xmqtq5i/v5Q+Qn4TIdL23UVJVPlmd30rrvaL26+StHj3/0xXNLxHpzFf2isfxfE43wUsFNTHWKHvXAHzc4WWw8H9vfBlTh0H2vVz0NWWDvIzC97WutsHNBuvAz8RfTutA91wbkjS/mVL02LOlZHLCSJgDmjvdrhz+fNCXHX0FTTVM+kWAccYJjU8MdC6scycEwzPpJI4pLC/hc4C+is7XAi4N186+zrtTxvg/EInUlaZ6IvEjYJwS1rtdLciNdV7S7Ju1Lhzjmkijoqgw4gI88tLILOA5uafxDzUZdoP5DNJq0aICu2ujMYHC90ZkYBvdFWTbAIbjdcMBSug5oZ09KhLYVsPhRe7cCj95ZDvfJd8TrkFLHIjmOCUdMA0k6BM5MTpQSHSN081OcoR9Y0VN+IXAcUFXsb4ywnCwDPUsaCbWGp/JBS/dF+Ff0zHdNfuGW6JUAk7JvSuf3LNOSdNdopKZRw2ANKMGk8l1pujB1kezFoKQQeaQqq2ClF5n5fVOg4LL+3GvMOHxRNc+MvlAzNNrc0ybk1FfZ1JJtlupeLcMmrpKVtRHnZuL7KK7Q+0Ch4VwltfIO8jecmdgz5HdS0akWvtzsOawdsoa4vFQ4OO7g43KpXbHxBXYdgMNDRTSmeucYw4ON7DcfmtUuM4/ZKGVSfhXe13tMxvjXGpJcVrJvs+mkcKGlNmtAtq4htgXeazueuYI3SNdcnwtTDiCXNV9w02c2zQAdEt7HNTSwGWPNDLqHW2PRaVBQVI5fJkdPVVM0zm+ORpBGyQyPYHGVp20Wj4RgrJYBJ3QtbTRIYtgAkY5rI7dNEP2pFv8ZtWZ7ITJJdoAaBt59U7wuWSDMXNDmk66KyQ8Nvja3NGQTqUKvC7COKOI3uA4gcv7rv2pi/47WyNrHxuga8NFtGkcx5j/nNWPs343xThniSmrqOtcyeEktfyIOliOhGhSEuDtMP3gtobi3PoqbUxy0dc15a4tzHLfmQdvqufWapitOGz6d9kXG0XHHCkGLxQ9w8kxzR5w4MeLXF/wA9bbq6hx6rxx+xVjVczjCfDIZpJaOekc+ojaDkZI1zbOPL8Vr817EbssG4NxOml6hS/mgit1RwEykIcQsjgDku2TAGWKXFG+xINivPPHlTXU+LOjjrJw17Q5wznU3K9FYiPdX+hXnvtAizY6Bb/LH6lY8kksyv+DdxF2i6Kk+WYguc9zj1JQR6xmRtggrxm2i8saTPTlK4ezs05JYEdE0pHe7s9EsHarHF6M7WxcOQvdJB2q6HJ+wvUV+SyL9oRubC4NbffDUehWtZgsn7fj+6oTf/ADh/VUxSvJH+xZR+EjC207razv8Aqqb2vxyx02GVDJLxsD2m2+b1V7Dj1KgO0eA1XB85sXOp5Gyi/Q6O/UL15+WY8b3Rk3BOB/bWNyTVAPdRnUjmVqMuG4d3DInQMcGbaKK4Iw9mGYBHO63eVIz6cgdlLB7nuzHRn8RUJzcno34YKKtnSGRRiOOMBo6IjWtc8ZmD5hO80AbuCiF8N9FN0vTZHa0JT00btmNTeOhiD83dAlOm1LPi87Iwq4W6ktHqgmgtUdipaZ1hLADZVftJ4epZMKFTRQhro/FoFaPb6F5DTURtJ2N05EAlLqKpF45Ra9rggouTjszSqeiS/YVbU/8AUCqLX+AYc/vdd7ubb817VGy83/sY8LjCjxTiL2EGOrFBGTzDfG79Wr0e1ZZ5FKbZlnGtCjUe9kRq5M8MiLibI9qVkq2LN1GiNZIUcjZIszSDql1fE1OKkhJadDeuHuz/AEKwjjaHPjRcRtGP1K3qrF6d/oVjHF0F69z7fhA/VeV+SyfryxZ6/wCJj2bRn1ZCC+yCkJaZ0sxsDa6CbHyIqOzfPA2zdqN1qZnolg5RuH1TJaZpaeSciRTi9I8+UaY6zLocmwkXRIjYvUdByyzt6P7ojsf84f1Wlh6zHt2dfB2de9aq8d/7Y/2Jkj8Jf0Yu1w6j6JvjEPteC19M0gulppGgW55SR+iVa53QKGqMfkjx2WgZTNMdNlzn/UuASPLfTkvdyZFBbMPH488zfRebIuhdk4ewvNp7qwn6KCx11bXWkmqRTsaPA0GzWj+/mrNi8ccLGwU4IiiYGMB3AAsLqn1tJX1Nc2d5y07D8LT4yOeUnQHz3WVSadI2uNrZASQ1dPUZ/tx2Un/d/wClZ8JrahwbG+fvCBrfcqpyUVVFWSurKiSSA5gxveuJPS99Ap7hymfaMtLnOva/kumm/uxsWvqiwzySRwkm7dN1TuIJGVBa19bK250awXJV4x6CR+GPyDUaEhUOSnhjrCZoi+7C0AuPhJFr/JTgmmVyu9HcPw2niDS+pqml+3e3aD/RaLwjJJHA2llmdI2Mju85uQOnos9wHBqtkczXVPjksGEFxYBzzNOjgRy/NXDAIKmn7tkzwSwAAi9iPmnm35dkYR/+Uey+wzDvs/gyWctDTiGIT1g82usAfo1X9rhdeQcc7S+L8GwPC8MwrEDSUlLTte0xNs+RznO+Nx1IFthbzXpvgrGpMa4RwjF5cpkrKOKaTKLDMWjN+d15WRvG9jZeLPqsr8bLO0qD41rpKPB5ZIj4g3RSLJyeSqnaPLIcOLWAi7gFn5Gf/XSE4mHtmSZIdm9bPU4aGzvzuaS2/VXFoWfdlxe2KRr9PHotCYV6H4efbG1/DJ/kodM7oLO28TgOiyziijdJUFrW6lawRoqhxLSiJzzG1pdyJWT/AMixSjGGVeIp+Jz/AK8jX8ma1NCymj1AzIJXG6ate91ywDyKC8TBPtG3I+pf9Fh4RlDsLjcDe7QpnvFWeCZP3JCf9gTzGMapcMiL53htuZK+jWKtHzzmm7JeeqjgYXyOAAUBFxXROxQ0wnZf1WbcYcZ1GIl9Ph84iZsZP7KlNZIJBIKsh4N8wOt+q14/x7krk6MeXmqDqKs9SQzslYHscCFm3bi4nCGgHXvAojgzjl9II6bEpg4DQSdfVd7WMZo8TwtrYHhxLwdCp4+PLHmjZSeaM8TaMrDX/wAarWIQGi4grqqTxxyxCVvnsCPqFZWhnO/0TfEKGGsMTnfAwObKDpmjNtvO4C9HPDtH+iHAzvFNr6aojpwJdXixNr+SZVVG17bBpt1CfSRCN5iaSQ0NtfeyM5zWRclno2RVsrowSKWTO8G293G6lqCjjZI0RMGVmqa4lXCKM5dXbBEpeIKXCaeminOaep+MlpNj8tgEU14UcKJ8wiohkibqT+E/oq/PhtPP4XMAkGxtuOhS1VxVFQMdNIxtr2GVhdr6BMq/E2SVra2nBEMzQXjkHdQucl6guFuhzR4fFC6zGWsfOyladkXeBh+IpnDUtfHvva6f08YlDXC1w4JW0/BZRobcRSOqO9pGi7oo4g3qbm9v/svWvZn7Ng3BmD4GagSy0dKyKQ3/AB2u4fIkj5LzLw3hUeIY82cECOKTv6hrt35T4beV7Ba7wRNIcfbme6xaSded153Mxtq19G21PEsb8NtjmG6qnaHU5aP/ALgpoTtZG0ucBp1VO7QquKSARteCcwO68qce1RJcXF1ydgvCWOSUtW2JrbtkdvfZarRVOeFrydwsJwKXLX09j+MLXKOrEVE1ztgEuHJLjZH18D+SwLJUktk/VV7KeEucRtzVDxvGo6qplp3yZX8jfdN+IsdEr8sMmgNjZUfiKoe6VkzHEO6hJzORn5+RQb+I/B/Hxwx/ZP0Wxypr6eR1pO8j3BsgoyHE3yt7qoF/NBXxcdwj1lE3yypv4yLVwNO37Cg8Y+AKq9ttRbB3GFwc8Eac91D8MY9JT8PsAebhoVY4gxmqxKR4mfmYCbBfVQ4/zs+SyZ/jRV562pjgL7kGyQp8SqZJQ3MdU5x4j2S4A2UVhR98attGSyXNRWF9tbWU1HLM+jcH62Cbhw7w6DZHieXCUXsEtHWNNen5owaXkNLdDodUS9z8Z+qPG77xvjO/VBrQU2toTxahioSHRGRwkYXEvdmN7/8ApQc0we0nkrVxEwyYcyUa92dfQ6frZUyBhE8gJuNwCsGZU9HrcebatjR8YkqQ552OgQq6UyyNlEGYs0DkyxWuqqeqaKKkNVKNct7BR80mKYgx0ktVSh2xZJI4ZfKwFguxrRoSeSVWOxTPqHyQ+zkBulzoLdFJtpe5pWwvjDGAWAsqqKfF5X91LPRhjNWl0ziPpZO4ZsbpgYYxFWwHVwa91meYuNPRN1aQcmNxXZMsUAyANB05Kz8JNFZitHQ7meZrPqQP6qpYbIZogXAt8lauAnuj4lhqmi4pj3g9Rt+agl7QjnaVmx8QcN4DwxA6mwSlMLZH+N75DI91tgXHl5KKw6skoqps8fxBFxLF5sQAklN7aqM9su/Kk/X8aY8cruy/4jxHUzYbdkuRxHJVyerkmJfLK57jzJTAzfcWzJIynLZRWCMVpFllJzC6kx1LJR+A3V1g4oa+jMRBvayziKobBEXEgac0lDxBGxzmutYLFk43dmpTVbLRX1pyucDqTdRtdP3lKL30UP8AbbKiURtN08fOCwNur4eKlsnl5P0REuI5KlsdtboJhihAxaIDqgvTjj0eXPIrE8ElH2E0FhJLeiiJ8zS/M0jdPOHsXgGGMgIIdzSGKSNfct13K34272jysqVekLjrvch6KHwh/vrdVJ4473L5KHwg++tV6JLwuAd96deSUjcAJbptm++PojwOBdKHbJWcN+9iv/8AlGjmjD2+v8KLkhudfyRmMgzjXn0SBJx5ZLSOjcLtewgj5KiSXY8jnsrm94DWgbKl17rSO/JY8y3R6HHbSsQiia2cyObvzXa5lJM0ukp2SPGxGh+qUppmvblcR/dEnZARcm5UOrRux5V6RVO2Izua6hYGg795e6lc8YiDGMa1oHwtCZRtizm7QGjmnLXwtADbXRkmxpZrW2JtY5hLtr8ldOEqV1Lhjqtw8dR8P8o/uVUGkSytB+EHbqtFwwtfg9PHcAhn9SmhGnRllO1Y/gkvT3vyTMSe8J7FFE2GxeBomstIYz3wddqdwfoI5V4PDOGx6nku09QCddk0ppIZmau1G6dwsjINkjha0UWSnsbY/Ue7eB1j5KtTVcrbDNr6KXxwFrD4rqt1L9QpPEWjm/gmcGqHmtGY8uiszZ/v7E9OSqGCvvWD0VjbJ72NenNVx4tEM2bY3xd372hIPNBI4s6+LQ+qC0xjRjnPZVMFZ7t3vQJ39pMEZieQCNL2TLDAfZG2IsQlTDGX2OW6r+yjO8drYjiTmVUQiYTe1lHUkDqfEGNJKnIqdjXA6KNrwW4lGRsE0cjk6FlDqiZDvvfkj05vJJv8kzEo7y9xaykYXwPhcYyC63VO2IlY1JNz4pPolaSGoqalkNPHUTSOOjGMzE/IKRwbBHz0/t1c2ZlK51omxnxy9SCdm+f0V+wT2XDKVsNBB7M0uIlOclz3C17ncjlbbRPHE5CuaRR8bh+ygaarzNre7uYv9IOFxmP8Vtbcr69FRq1l7q69qDXs4pdUkksqoWvafMDKR+Q+qp84uvL5FqbTPX4qTgmvsiWMlD/CSEhUulY6xGo5qTLcrgUKmAObdzd+akplniRCmd+rQDulaVkrzc6D8069mBNk5jiDG6Dfqu/YD9Ryjjyuur7guK0dPhtPDiELTTBxbJI1v3kbSfiB523IOhF+apMQs699U6xKobFg8+Y6Bjv0K6EndhnFdaNNxnhOuga+pgqRV07NXGMnM0dS3mPMX+SjquZlPhzo3PJKufDssgwmgZIfvDRxNfc63yBRVRTUldWmhrSIpL/dVBF8wOwd16X5L1p8fVo8iGe3TM6w+qeJ3DMbXKsNJWlrTZ3JTNdwpUUjXEUfettcPhOYEem/5KmVJdT1EhHw9FjlBxNscimOcXqTKNeigKt2o1TuWqEo0UdWu8bQEiQ/anolMDfeuHorGHe+fTkqtgTvfR6Kxh3vo+XNXxR0Zc0tiWKv/e8PqgkcVcftmEeaCrRHsVrDXkUjE4Dz3g2Ufhj/AHRuqdZwJASfqp1se9DxjtlH4gR3976qawbB8WxRzRQUFROObwwhjfMuOg+q0DAezjCYC2ox2Q11QRcQMeWRN9ebvXQeSOPHJvQJzilszHh3BsTxyodFRsAjYLyzv0jjHmevkNStI4Y4OwnDgJHOlxGouLvlbkiaf9rN3H+b6Kcq54TkoMOijgoodmRsDW39AlqaZrbuDWgRtJHqt+PAkrkY55m3USFxyZsuNiPQthAGnkusfkooHONs8rz9VFueX180h1Lin2Ig/Y0NjZwJIVfoFboacc4U/GMDzUzM9ZSnvImj8f8AEz5jbzAWWNlZK3O06HroQtmo5e+pmvG5aLhUbj3hSeSaTGMEYDO/xVFMP80/xs/3dRz9d/P5vH7/ADj6beHyOj6sqNr9Lo+bwWUXSV4e8skBa4GxBFiD0IT6SYNbcnReQ4taPZUlJHSW32F0L5t0h7SwnQozpQI83JCmdYqHgELtHTPx7HqLBIrlk0gdOR+GNurj9NPUqPpxWV9S2no4JJ5nmzI2C5/8eq1js84ZZgdO6aUtkxCcDv5RqGjkxvkOvM/Ja+Nx3OWzHyc6jEtb5hE5pbdozta0DkAUzx2K5c8fFG8jTpe4RK94dWRxt2aU9xJmeWQEfGLr3Evo8XxpjrBcRdVUZjlcXPjtnF9bcnjz6pnjvD+HYs4urHPgkdoKyFlz/wDI38Xruoqinkoq1srLeE6g8xzCsUsgjayaI5qeQXAOtvJK4qa6yGcnCXaJQ8R7M+JaLNPRCmxSn3DqaSzrfyOsfpdUjFoZYKkwzxSRSsNnMkaWuHqDqt+wzEnUxtG7NGd2OT7E6XBeIKfucVw+Grj5F7fvIv5XDxD6rLPiNf8ALNEOX/7I8+4EbVo9FZGu98+itOLdmMFLMKrBq5zWHaOo8TT5B42/7h81U3NfFiTopGlj2OyuadwRySRxuPoMmRSehvip/fMPqgiYq799Q+qCeidlQw59qVpK27s3wGGjwqOpfQwe2yxiSSWeMPc2+oa0EHLbTzWddkHDzMarxWVbL0NEQ94I0kfu1vpzPp5rZG1TxVgAhrH+EBU4+JN9mLnm0qTHdTXTOjaJZS4DSOMbX6kKKxSrMUToWPJll+N3l0XJniOqcHO0GoJUdUZn1QcdQStnVLSMybe2Ls7ung8TvEeaSllLKGVx/FoE0xOS8rWjYLuLv7uhjjHMXQbHUfCLgGd5d5qUr9MOiHzTGlZaMaKRxAe7Rt6NQ+hr+Q1pH91l18JNiE6nkjzZT+LdMWE5PTyS0zRLFrvy8kjHS2QXEvCmGYtJ7RNE6Ko5VENg4/zDZ3z181U67gqvAy02IU0gG3eB0Z/QhX/vZ4rtPiC4KlhP3jLHzb/ZY8mKLe0a8eacdJmc03A+Kl472roWDykc79GqapuCoHBraqtmlaN2wx5Afmb/AKK2uqYm/CwE/wApRop55NGR287WU48eLfg0uROvQmDYVSYbB3NJSspoz8VtXSfzE6n9FJw1AdLki0a3c+abyOcxmQkZj0SlIAxtwtsIdUZJS7bYnJ4qwO81LVf+Iw9Wj9FFNsZb7aqUqdREb8lVekpeEPXR2fcaJ7hNQ58D6J2ocLx+TunzXKyPMFHsLopRyIOhQkqdjx+SpknHJ5kHkn9BVOe1xa6z2KLlNy2Zuz9SOjuY/r813DZclda9g7Q/NNYjiWanxKzGlzrscbOHJVXj/AO5qmY9RDNTTua2oaB/hScj6O/X1TqKUl3dE6OP5gqdp5opGy4fVXdTzsMcgPQ8/UbqeVXHR2PTpmNYqf31D6oJXiWlkoeKPY5vjhkLSevQ/MaoLOUL9wlhreHuFaLDAB3zWZ6gj8UjtXfTb5JernczK47jUeqNWym5PmmVe68YI+Ei61xVKkS9ex7ijzPTMmHNqbUspdHYi5CVp7SYd3N9Wt0CZULi2ZzCL3vYI2cl9CVSc9UG8yQAjYy/PVthadGAC3ok6ciTFyT8MV3n5IsAM1VJMdidFww4p2eJrfNO8QF3ZeQFlykZeoFxtqhVOzTORfgsXbGDW7gJVmg5rlvEjZdPJJQ9gdGHi6SdTAnRKsfkda2idNykXC6rObaGUVKOaclrYGbapUkMF0xqJA9+iNKIE3IKSXvuU6j0ZvZN4hrsnH4UEFsTYPHfRSM5BgjJO2hTBuh2unrrupmixNkyFkFkF2/JMKmPQkBSDNW2/VJSMvcIsCdMa0ju8jdCTq7bydySMDyysF9DfUISDuZgRoCksQeW10MnKXX58/8AnmpeFfSRpDmr7fwvKeNnLqiRwdfK/KPkmdEQKipkI0bc/wBUWkktAwnUvkv6prJtEL2pUl8XwrF2bVDO5kP+9m31aR9EFN8T07a7hWTXxU0jJ2fI2P5E/RBQqnQzt7D1bvCD1JCbOIfTuZ+JhuggtAoahltKwX0cC0/0SQJixEN5Xt9UEEBkNKRzhS1c+zppe6YfIb/mfyUhSxd3GG8gEEEV6LLweU1o4pJfkE2a4uJN9UEE0hY+BPxFGtYbBBBAIR7b7khGjdlFrHTndBBAf6CzzaWFgmpJJQQSv0MVocQ9Ute7EEEyFZxqdMN6fzCCCIr8CxOvptdG1B1IQQRQBtWxhzbjmoyrBfHED8UMwv6EW/sggpzKQ8Hj5QyCpAOr35R9B/5RGSZXBvKNtz6n/gQQSpjMeTkyYJWwg2L6WRo9cpQQQUp+jQWj/9k=";
 
 const DATA = {
-  updated: "30 июля 2026, 11:40",
-  readinessPercent: 9,
+  updated: "30 июля 2026, 12:15",
+  readinessPercent: 26,
   daysToLaunch: 62,
-  heroSub: "Ранний этап: определена стратегия, роли консилиума и первая механика — подтверждение квалификации врача при регистрации. Разработка продукта ещё не начата.",
+  heroSub: "Реальный статус на сегодня: движок расчёта баллов и схема базы данных написаны, 31 экран кабинета врача и фармы собран и кликабелен как демо на локальных данных. Следующий большой кусок — подключить эти экраны к настоящей базе данных и авторизации, а не только к демо-данным.",
   flag: null, // например: "Набор врачей: пока нет данных — цель появится после запуска"
 
   // phase переключается вручную в момент реального запуска платформы
   phase: "pre-launch", // "pre-launch" | "post-launch"
 
   metricsPreLaunch: [
-    { label: "Основа платформы", value: "20%", goal: "фундамент, на котором строится всё остальное" },
-    { label: "Функции для врачей", value: "5%", goal: "в работе: подтверждение квалификации, экспертная лестница" },
-    { label: "Функции для фармы", value: "0%", goal: "в работе: спонсорская лента, разложены новые идеи по бэклогу" },
-    { label: "Мобильные приложения", value: "0%", goal: "второй этап, после веба" },
+    { label: "Основа платформы", value: "40%", goal: "схема базы данных, первая миграция и движок расчёта баллов уже написаны; нет ещё живого подключения (авторизация, права доступа)" },
+    { label: "Функции для врачей", value: "45%", goal: "31 экран кабинета собран и работает как демо (счётчик, портфолио, сертификаты, обучение); не подключены к настоящей базе" },
+    { label: "Функции для фармы", value: "20%", goal: "есть демо-экраны кабинета фармы и регулятора; реальных функций монетизации ещё нет" },
+    { label: "Мобильные приложения", value: "0%", goal: "второй этап, после веба — ещё не начали" },
     { label: "Решений принято за неделю", value: "7", goal: "см. бэклог ниже" }
   ],
 
@@ -331,7 +338,30 @@ const DATA = {
     { text: "Юридическое заключение по оплаченным опросам: кто в Med Expert закажет его и когда — без этого не запускаем эту монетизацию", status: "open" }
   ],
 
-  marketingEmpty: "Пока нет ни одной согласованной стратегии — маркетолог роста предложит первую, когда будет проверен реальный канал привлечения.",
+  // marketingStrategy — сюда вписывается согласованная стратегия, когда она появится
+  marketingStrategy: null,
+  marketingEmpty: "Пока нет ни одной согласованной и проверенной на практике стратегии. Ниже — рабочие гипотезы из старых материалов, которые ещё предстоит проверить, а не готовый план.",
+
+  marketingHypotheses: [
+    { title: "Публикации в журналах Scopus",
+      what: "Дать врачу возможность опубликовать статью в одном из трёх журналов Med Expert — они уже входят в международную базу Scopus, у них есть DOI и архив с 1999 года.",
+      why: "Посредники продают публикацию в Scopus от 340 долларов, а Med Expert может брать около 119 — втрое дешевле, при этом актив (журналы) уже готов, разрабатывать ничего не нужно." },
+    { title: "Двойные баллы за международный контент (аккредитация ACCME)",
+      what: "Явно показывать врачу, что мероприятия с международной аккредитацией дают в два раза больше баллов — например 8 вместо 4 за вебинар.",
+      why: "Такая аккредитация у Med Expert уже есть, и логика начисления уже заложена в системе — нужно только красиво показать это врачу, а не строить заново." },
+    { title: "Реферальная кампания вместо тихой функции «пригласи коллегу»",
+      what: "Превратить приглашение коллег в кампанию с датой окончания, видимым счётчиком и рассылкой — а не оставлять как незаметную кнопку в настройках.",
+      why: "База контактов Med Expert и так покрывает почти весь рынок врачей Украины — это способ разбудить тех, кто уже давно не заходил, а не найти совсем новых людей." },
+    { title: "Экспертная лестница как двигатель регулярных визитов",
+      what: "Пять уровней признания — от участника до эксперта платформы, основанные на мнении коллег, а не на решении администрации.",
+      why: "Даёт врачу причину возвращаться регулярно, а не только раз в год ради нормы баллов. Важное условие: признание должно быть заслуженным раньше, чем к нему получит доступ фарма — иначе это станет платным пропуском, а не репутацией." },
+    { title: "Спонсорская лента с фиксированным месячным тарифом",
+      what: "Продавать фарме место в ленте сообщений по месячному тарифу с лимитом частоты, а не разовыми размещениями.",
+      why: "Даёт предсказуемый регулярный доход вместо случайных сделок; сами материалы называют это самым быстро окупаемым источником дохода от фармы." },
+    { title: "Короткие клинические выжимки как источник трафика",
+      what: "Публиковать короткие адаптации научных статей под конкретные клинические вопросы, с прямой ссылкой на ближайшее мероприятие по этой же теме.",
+      why: "Врач приходит из поиска с конкретным вопросом здесь и сейчас — именно в этот момент он охотнее всего увидит и запишется на релевантный курс или мероприятие." }
+  ],
 
   team: [
     { name: "Игорь", desc: "Задаёт логику и идею платформы, ведёт переговоры и утверждает финальные решения.", founder: true, photo: IGOR_PHOTO,
@@ -348,20 +378,11 @@ const DATA = {
   feed: [
     { day: "Сегодня, 30 июля", items: [
       { tag: "Игорь",
-        preview: "Остановил показ метрик «врачи» и «фарма» — рано, платформа ещё не запущена.",
-        full: "Игорь указал, что предложенный набор метрик подходит только для уже запущенной платформы. Дашборд переделан: до запуска показывается прогресс по блокам платформы и темп решений консилиума, а метрики про врачей и фарму включатся автоматически в день реального запуска." },
-      { tag: "Продакт-стратег",
-        preview: "Закрыт вопрос: чем можно подтвердить квалификацию врача при регистрации.",
-        full: "Выяснили, что готового публичного реестра для проверки личного сертификата врача нет — есть только реестр лицензий для медучреждений и ФОП. Решили: основной сигнал — привязка к учреждению или поручительство уже подтверждённого врача, а не сам документ." },
-      { tag: "Аналитик реалий врача",
-        preview: "Предложил проверить, не даёт ли статус Med Expert как провайдера баллов БПР готового пути подтверждения.",
-        full: "Раз Med Expert сам начисляет баллы БПР, есть шанс, что при оформлении баллов через государственную систему личность и специализация врача уже подтверждаются. Открытый вопрос: зарегистрирован ли Med Expert как провайдер уже сейчас, и что именно провайдер получает от системы при начислении баллов." },
-      { tag: "Все роли",
-        preview: "Договорились не останавливаться на «решения нет» — искать дальше и всегда предлагать следующий шаг.",
-        full: "Правило добавлено во все семь ролей: если прямого источника или решения не нашлось, сначала проверить, не меняют ли картину собственные данные или статус Med Expert, попробовать скомбинировать слабые сигналы, и в любом случае закончить не тупиком, а конкретным следующим шагом." },
-      { tag: "Продакт-стратег",
-        preview: "Закрыл ещё два вопроса: статус Med Expert как провайдера БПР и формат верификации врача при регистрации.",
-        full: "Med Expert уже официально выгружает свои мероприятия в систему БПР как провайдер — автозачёт баллов за свой контент уже работает. Полный импорт всего портфолио врача из госреестра — отдельный трек через частный договор с оператором (Центр якості освіти МОЗ), он не блокирует запуск. Формат верификации при регистрации тоже определён: сначала подтверждение личности через BankID, затем квалификация — загрузка диплома или сертификата с модерацией и сверкой по открытому лицензионному реестру. Доступ к официальному реестру медспециалистов — отдельный долгий трек через партнёрство с МОЗ, не зависимость продукта." },
+        preview: "Указал, что отсутствие новых строк кода за день — не повод занижать оценку готовности.",
+        full: "Игорь поправил подход к этой странице: даже если в конкретный день не было новых коммитов, это не значит, что ничего не сделано — нужно показывать реальный статус проекта, а не только сегодняшнюю активность. Аналитик метрик пересчитал показатели, заглянув напрямую в код репозитория." },
+      { tag: "Аналитик ценности и метрик",
+        preview: "Пересчитал готовность платформы по фактическому коду, а не на глаз.",
+        full: "В репозитории уже написан движок расчёта баллов (правила, лимиты, темпоральность), готова схема базы данных с первой миграцией, и собрано 31 экран кабинета врача и фармы — счётчик, портфолио, сертификаты, обучение, опросы, кабинеты фармы и регулятора. Экраны пока работают как демо на локальных данных в браузере, без подключения к настоящей базе — это и есть следующий большой кусок работы. Показатели готовности на этой странице подняты, чтобы отражать реальный объём, а не только «есть код / нет кода»." },
       { tag: "Продакт-стратег",
         preview: "Ускорили экспертную лестницу для врачей — фарма хочет доступ к именам уже сейчас.",
         full: "Игорь согласился ускорить запуск экспертной лестницы (пять уровней роста от участника до эксперта платформы), хотя по плану её откладывали на дальний этап. Условие: признание должно расти «снизу», от мнения коллег, и быть готово раньше, чем откроем фарме доступ к конкретным именам — иначе лестница превратится ровно в то, что сам план и запрещает: гарантированный доступ к врачам за деньги." },
@@ -372,8 +393,32 @@ const DATA = {
         preview: "Разложил новый пакет идей для врачей и фармы по бэклогу.",
         full: "Новые идеи — платная подписка на разборы случаев, оплаченные опросы, пакетные предложения для фармы, рейтинг спикеров по специальностям и другие — легли в общий бэклог. Часть пошла в работу сразу (экспертная лестница, спонсорская лента, реферальные приглашения), часть ждёт юридического заключения (оплаченные опросы), часть требует защиты от накруток до запуска (рейтинг спикеров)." },
       { tag: "Продакт-стратег",
-        preview: "Нашёл три вопроса, которые может закрыть только сама компания Med Expert, не консилиум.",
-        full: "Нужны реальные ответы от компании: в каком виде хранятся сертификаты врачей за 2025–2026 год, официальный шаблон портфолио (приложение 4) для PDF-экспорта, и доступ к полному справочнику специальностей с med-expert.com.ua. Без этих трёх пунктов часть функций счётчика и импорта не собрать до конца — вынес их в раздел вопросов выше." }
+        preview: "Нашёл вопросы, которые может закрыть только сама компания Med Expert, не консилиум.",
+        full: "Нужны реальные ответы от компании: в каком виде хранятся сертификаты врачей за 2025–2026 год, официальный шаблон портфолио (приложение 4) для PDF-экспорта, доступ к полному справочнику специальностей с med-expert.com.ua, и кто закажет юридическое заключение по оплаченным опросам. Без этих пунктов часть функций счётчика и монетизации не собрать до конца — вынес их в раздел вопросов выше." },
+      { tag: "Маркетолог роста",
+        preview: "Достал из старых материалов рабочие маркетинговые гипотезы — публикации в Scopus, двойные баллы и другие.",
+        full: "Ничего из этого не согласовано и не проверено на практике — это гипотезы, которые ещё предстоит протестировать, а не готовая стратегия. Зафиксировал каждую с пояснением, что именно предлагается и почему это должно сработать, чтобы не потерять идеи и не путать их с решённым." }
+    ]},
+    { day: "28 июля", items: [
+      { tag: "Аналитик реалий врача",
+        preview: "Определили, как на старте подтверждать личность и квалификацию врача.",
+        full: "Личность врач может подтвердить быстро и самостоятельно — через BankID или Дія.Підпис. А вот официальный государственный реестр медицинских специалистов напрямую нам не открыт: доступ к нему возможен только как часть партнёрства с МОЗ, это отдельный процесс на месяцы, не зависящий от нас. Поэтому на старте квалификация подтверждается загрузкой диплома или сертификата с модерацией и сверкой по открытому лицензионному реестру — честный промежуточный статус вместо обещания того, чего пока не существует." }
+    ]},
+    { day: "27 июля", items: [
+      { tag: "Аналитик реалий врача",
+        preview: "Проверили: официального способа автоматически подтянуть всю историю баллов врача не существует.",
+        full: "Изучили официальные источники МОЗ и Центра якості освіти: канал для автоматической выгрузки личного портфолио врача закрыт для внешних систем, открытой документации нет. Зато выяснили: Med Expert уже официально зарегистрирован и выгружает свои мероприятия в систему БПР как провайдер — баллы за собственный контент уже начисляются автоматически. Решили строить дальнейший автозачёт на двух путях: свой контент (уже работает) и распознавание загруженных врачом сертификатов — тем же путём идёт лидер рынка (сервис с 290 тысячами профилей), но честнее по согласию врача." },
+      { tag: "Аналитик реалий врача",
+        preview: "Собрали демо-сценарий продукта на 5 минут.",
+        full: "Сценарий показывает всю логику платформы на одном враче: счётчик баллов БПР → оплаченный опрос от фармы → деньги в личный кошелёк → оплата курса в Академии этими деньгами → баллы БПР зачислены. Один связный сюжет вместо перечисления полутора десятков разделов кабинета." }
+    ]},
+    { day: "26 июля", items: [
+      { tag: "Технический постановщик",
+        preview: "Выбрали технический стек и структуру проекта.",
+        full: "Решили строить как единый репозиторий на Next.js с общим пакетом-ядром для расчёта баллов, который сможет переиспользовать и будущее мобильное приложение. База данных — Postgres, локально, без облачной зависимости на старте разработки. Игорь подтвердил порядок платформ: сначала веб-версия, мобильное приложение — вторым этапом." },
+      { tag: "Продакт-стратег",
+        preview: "Собрали план работ на первые два этапа и полную карту всего меню кабинета врача.",
+        full: "Расписали, что входит в технический фундамент платформы (модель данных, роли и права, безопасность) и что — в первый рабочий этап (счётчик баллов и портфолио). Отдельно зафиксировали, какие вопросы и документы должны прийти от компании Med Expert, чтобы не блокировать разработку: официальный шаблон портфолио, справочник специальностей, формат хранения сертификатов за 2025–2026." }
     ]}
   ]
 };
@@ -456,7 +501,21 @@ if(DATA.questions.length===0){
   });
 }
 
-document.getElementById('marketing').appendChild(el(`<div class="empty">${DATA.marketingEmpty}</div>`));
+const marketingWrap = document.getElementById('marketing');
+if(DATA.marketingStrategy){
+  marketingWrap.appendChild(el(`<div class="empty">${DATA.marketingStrategy}</div>`));
+} else {
+  marketingWrap.appendChild(el(`<div class="empty">${DATA.marketingEmpty}</div>`));
+}
+(DATA.marketingHypotheses || []).forEach(h=>{
+  marketingWrap.appendChild(el(`
+    <div class="hypo-card">
+      <div class="hypo-title">${h.title}</div>
+      <div class="hypo-text"><b>Что:</b> ${h.what}</div>
+      <div class="hypo-text"><b>Почему:</b> ${h.why}</div>
+    </div>
+  `));
+});
 
 function avatarHTML(r){
   if(r.photo){ return `<img src="${r.photo}" alt="${r.name}">`; }

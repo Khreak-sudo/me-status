@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Med Expert — статус платформы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEEAE0;
+    --paper-card:#F6F3EB;
+    --ink:#1B2624;
+    --ink-soft:#4B5956;
+    --petrol:#1F5C56;
+    --petrol-deep:#123B38;
+    --amber:#C98A2E;
+    --rose:#B5615A;
+    --slate:#52708A;
+    --moss:#6B7B4A;
+    --graphite:#5B5347;
+    --mist:#D7E4E1;
+    --line:#D9D3C4;
+    --danger:#B5442E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'IBM Plex Serif', serif; margin:0; font-weight:600;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:960px; margin:0 auto; padding:20px 20px 60px;}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(160deg, var(--petrol-deep), var(--petrol));
+    color:var(--paper-card);
+    border-radius:20px;
+    padding:28px 26px;
+    margin-bottom:18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:220px; height:220px; border-radius:50%;
+    background:radial-gradient(circle, rgba(201,138,46,0.35), transparent 70%);
+  }
+  .hero-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+  .hero-label{font-size:13px; letter-spacing:.04em; opacity:.75; text-transform:uppercase;}
+  .hero-big{font-size:clamp(46px,10vw,72px); line-height:1; margin-top:6px;}
+  .hero-big span{font-size:0.4em; opacity:.6; font-family:'IBM Plex Sans';}
+  .countdown{
+    text-align:right;
+  }
+  .countdown .num{font-size:32px; font-family:'IBM Plex Mono'; font-weight:600;}
+  .countdown .lbl{font-size:12px; opacity:.75; margin-top:2px;}
+  .hero-sub{margin-top:14px; font-size:14px; opacity:.85; max-width:520px;}
+  .flag{
+    margin-top:16px;
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.25);
+    padding:8px 14px; border-radius:100px;
+    font-size:13px;
+  }
+  .flag .dot{width:7px;height:7px;border-radius:50%;background:var(--amber); flex-shrink:0;}
+
+  /* METRIC CARDS */
+  .metrics{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+    gap:12px;
+    margin-bottom:24px;
+  }
+  .card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:16px 16px 14px;
+  }
+  .card .m-label{font-size:12.5px; color:var(--ink-soft); margin-bottom:8px; line-height:1.3;}
+  .card .m-value{font-family:'IBM Plex Mono'; font-size:26px; font-weight:600;}
+  .card .m-goal{font-size:12px; color:var(--ink-soft); margin-top:4px;}
+  .card .m-dash{font-family:'IBM Plex Mono'; font-size:26px; color:var(--ink-soft);}
+
+  /* SECTIONS */
+  .section-title{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin:30px 0 12px;
+  }
+  .section-title h2{font-size:19px;}
+  .section-title .hint{font-size:12.5px; color:var(--ink-soft);}
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:760px){ .two-col{grid-template-columns:1fr;} }
+
+  /* BACKLOG */
+  .lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media (max-width:520px){ .lanes{grid-template-columns:1fr;} }
+  .lane{background:var(--paper-card); border:1px solid var(--line); border-radius:14px; padding:12px;}
+  .lane h3{font-size:12.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-soft); font-family:'IBM Plex Sans'; font-weight:600; margin-bottom:10px;}
+  .lane-item{font-size:13.5px; padding:8px 0; border-top:1px solid var(--line);}
+  .lane-item:first-of-type{border-top:none;}
+
+  /* FEED */
+  .feed{background:var(--paper-card); border:1px solid var(--line); border-radius:16px; padding:6px 16px;}
+  .feed-day{font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); padding:14px 0 6px;}
+  .feed-item{display:flex; gap:10px; padding:10px 0; border-top:1px solid var(--line); align-items:flex-start;}
+  .feed-item:first-of-type{border-top:none;}
+  .tag{
+    flex-shrink:0;
+    display:flex; align-items:center; gap:6px;
+    font-size:11px; padding:3px 10px 3px 3px; border-radius:100px;
+    background:var(--mist); color:var(--petrol-deep); height:fit-content;
+    white-space:nowrap;
+  }
+  .tag-avatar{
+    width:18px; height:18px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; background:var(--petrol);
+  }
+  .tag-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+  .tag-avatar svg{width:11px; height:11px; color:var(--paper-card);}
+  .feed-body{flex:1; min-width:0;}
+  .feed-text{font-size:14px; line-height:1.45;}
+  .feed-text b{font-weight:600;}
+  .feed-full{display:none; margin-top:8px; font-size:13.5px; line-height:1.55; color:var(--ink-soft);}
+  .feed-item.open .feed-full{display:block;}
+  .expand-btn{
+    display:block; margin-top:7px; background:none; border:none; padding:0;
+    font-family:'IBM Plex Sans'; font-size:12.5px; font-weight:600;
+    color:var(--petrol); cursor:pointer;
+  }
+  .expand-btn:hover{text-decoration:underline;}
+
+  /* TEAM */
+  .team-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+  @media (max-width:600px){ .team-grid{grid-template-columns:1fr;} }
+  .role-card{background:var(--paper-card); border:1px solid var(--line); border-radius:14px; padding:13px 14px;}
+  .role-card .r-top{display:flex; align-items:center; gap:10px; margin-bottom:7px;}
+  .role-card .r-avatar{
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    overflow:hidden;
+  }
+  .role-card .r-avatar svg{width:20px; height:20px; color:var(--paper-card);}
+  .role-card .r-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+  .role-card .r-name{font-size:14px; font-weight:600;}
+  .role-card .r-desc{font-size:12.5px; color:var(--ink-soft); line-height:1.4;}
+  .role-card.chair{border-color:var(--petrol); background:var(--mist);}
+  .role-card{cursor:pointer; transition:box-shadow .15s ease, transform .15s ease;}
+  .role-card:hover{box-shadow:0 4px 14px rgba(18,59,56,0.12); transform:translateY(-1px);}
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(27,38,36,.55);
+    display:none; align-items:center; justify-content:center;
+    padding:20px; z-index:50;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--paper-card); border-radius:18px; max-width:420px; width:100%;
+    padding:24px 22px; position:relative; box-shadow:0 20px 50px rgba(18,59,56,0.25);
+  }
+  .modal-close{
+    position:absolute; top:14px; right:14px; background:none; border:none;
+    font-size:18px; line-height:1; cursor:pointer; color:var(--ink-soft); padding:4px;
+  }
+  .modal-avatar{
+    width:52px; height:52px; border-radius:50%; display:flex;
+    align-items:center; justify-content:center; margin-bottom:14px; overflow:hidden;
+  }
+  .modal-avatar svg{width:28px; height:28px; color:var(--paper-card);}
+  .modal-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+  .modal-name{font-family:'IBM Plex Serif'; font-size:18px; font-weight:600; margin-bottom:10px;}
+  .modal-bio{font-size:13.5px; line-height:1.6; color:var(--ink-soft);}
+
+  .dev-team{
+    margin-top:10px; background:var(--paper-card); border:1px dashed var(--line); border-radius:14px;
+    padding:13px 14px; font-size:13.5px; display:flex; justify-content:space-between; align-items:center;
+  }
+  .dev-team .status{display:flex; align-items:center; gap:8px; color:var(--petrol-deep); font-weight:600;}
+  .dev-team .status .dot{width:8px;height:8px;border-radius:50%;background:var(--petrol);}
+  .dev-team .d-left{display:flex; align-items:center; gap:10px;}
+  .dev-team .r-avatar{
+    width:30px; height:30px; border-radius:50%; background:var(--mist);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .dev-team .r-avatar svg{width:15px; height:15px; color:var(--petrol-deep);}
+
+  /* MARKETING */
+  .empty{
+    background:var(--paper-card); border:1px dashed var(--line); border-radius:14px;
+    padding:18px; font-size:13.5px; color:var(--ink-soft);
+  }
+
+  footer{margin-top:30px; font-size:11.5px; color:var(--ink-soft); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Готовность к запуску</div>
+        <div class="hero-big" id="readiness">—<span>%</span></div>
+      </div>
+      <div class="countdown">
+        <div class="num" id="days-left">—</div>
+        <div class="lbl">дней до цели по запуску</div>
+      </div>
+    </div>
+    <div class="hero-sub" id="hero-sub">Загрузка данных…</div>
+    <div class="flag" id="flag" style="display:none;">
+      <div class="dot"></div>
+      <span id="flag-text"></span>
+    </div>
+  </div>
+
+  <div class="section-title"><h2 id="metrics-title">Прогресс к запуску</h2><div class="hint" id="metrics-hint">актуально до конца сентября</div></div>
+  <div class="metrics" id="metrics"></div>
+
+  <div class="section-title"><h2>Бэклог</h2><div class="hint">только утверждённые пункты доходят до разработки</div></div>
+  <div class="lanes" id="lanes"></div>
+
+  <div class="two-col">
+    <div>
+      <div class="section-title"><h2>Маркетинговые стратегии</h2></div>
+      <div id="marketing"></div>
+    </div>
+    <div>
+      <div class="section-title"><h2>Команда</h2></div>
+      <div class="team-grid" id="team"></div>
+      <div class="dev-team">
+        <span class="d-left"><span class="r-avatar" id="dev-icon"></span>
+          <span>Команда разработки<br><span style="font-size:11.5px; color:var(--ink-soft);" id="dev-focus"></span></span>
+        </span>
+        <span class="status"><span class="dot"></span><span id="dev-status">активна</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>Что происходило</h2><div class="hint">простыми словами, по дням</div></div>
+  <div class="feed" id="feed"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<div class="modal-overlay" id="role-modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">&#10005;</button>
+    <div class="modal-avatar" id="modal-avatar"></div>
+    <div class="modal-name" id="modal-name"></div>
+    <div class="modal-bio" id="modal-bio"></div>
+  </div>
+</div>
+
+<script>
+/* ====== ДАННЫЕ (пример) ======
+   Этот блок — единственное, что нужно менять при ежедневном обновлении.
+   Реальный источник — внутренние документы проекта; сюда данные должны
+   попадать через ежедневный процесс (например, задачу в Cowork),
+   а не редактироваться вручную каждый раз. */
+const IGOR_PHOTO = "data:image/jpeg;base64,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";
+
+const DATA = {
+  updated: "30 июля 2026, 19:40",
+  readinessPercent: 9,
+  daysToLaunch: 62,
+  heroSub: "Ранний этап: определена стратегия, роли консилиума и первая механика — подтверждение квалификации врача при регистрации. Разработка продукта ещё не начата.",
+  flag: null, // например: "Набор врачей: пока нет данных — цель появится после запуска"
+
+  // phase переключается вручную в момент реального запуска платформы
+  phase: "pre-launch", // "pre-launch" | "post-launch"
+
+  metricsPreLaunch: [
+    { label: "Основа платформы", value: "20%", goal: "фундамент, на котором строится всё остальное" },
+    { label: "Функции для врачей", value: "5%", goal: "в работе: подтверждение квалификации" },
+    { label: "Функции для фармы", value: "0%", goal: "пока не начаты" },
+    { label: "Мобильные приложения", value: "0%", goal: "второй этап, после веба" },
+    { label: "Решений принято за неделю", value: "2", goal: "см. бэклог ниже" }
+  ],
+
+  metricsPostLaunch: [
+    { label: "Врачи с нами", value: null, goal: "цель — 10 000 к концу октября" },
+    { label: "Фарма-партнёры", value: null, goal: "цель — 5 к концу октября" },
+    { label: "Возвращаются ли врачи", value: null, goal: "" },
+    { label: "Улучшения, которые точно помогли", value: null, goal: "" }
+  ],
+
+  lanes: {
+    "В работе": [
+      "Подтверждение квалификации врача при регистрации"
+    ],
+    "Сделано": [],
+    "На рассмотрении у Игоря": [
+      "Формат верификации: через собственный статус провайдера БПР или через ручную проверку"
+    ]
+  },
+
+  marketingEmpty: "Пока нет ни одной согласованной стратегии — маркетолог роста предложит первую, когда будет проверен реальный канал привлечения.",
+
+  team: [
+    { name: "Игорь", desc: "Задаёт логику и идею платформы, ведёт переговоры и утверждает финальные решения.", founder: true, photo: IGOR_PHOTO,
+      bio: "Автор идеи и общей логики платформы: определяет, зачем и для кого она делается. Ведёт переговоры и внешние партнёрства, которые нужны проекту. Утверждает финальные решения и бэклог — то, что предлагает консилиум, идёт в разработку только после его подтверждения. Задаёт направление маркетинговой стратегии, которую детально прорабатывает маркетолог роста." },
+    { name: "Продакт-стратег", desc: "Председатель консилиума. Решает, что делать и почему, ведёт бэклог.", chair: true, color: "var(--petrol-deep)", bio: "10+ лет в продуктовой стратегии двух- и трёхсторонних платформ, знает проблему «курицы и яйца» и с чего начинать запуск. Работал с профессиональными сообществами и умеет превращать пассивных участников в лидеров через репутационные механики. Понимает, чего реально хотят B2B-покупатели в фарма-индустрии. Знает рынки Восточной Европы и типичные ошибки запуска подобных платформ." },
+    { name: "Аналитик реалий врача", desc: "Следит, чтобы платформа решала настоящие проблемы украинских врачей.", color: "var(--petrol)", bio: "Глубоко разбирается в системе БПР — как врачи набирают баллы и какие организации аккредитованы МОЗ. Знает демографию врачей в Украине: миграцию, дефицит кадров, возрастной состав. Понимает реальные условия работы — доходы, совместительство, мобилизацию, выгорание. Знает, какими каналами реально пользуются врачи и почему они устали от рекламы фармы. Ориентируется в ландшафте уже существующих платформ для врачей." },
+    { name: "Коммерческий стратег по фарме", desc: "Отвечает за законность и коммерческий смысл монетизации через фарму.", color: "var(--amber)", bio: "Знает структуру фарма-рынка в Украине — представительства, производителей, модель медпредставителей. Понимает, что фарма реально покупает у медицинских платформ: спонсорство, доступ к аудитории, доступ к лидерам мнений. Разбирается в регуляторных рамках — рекламе лекарств, защите персональных данных, разделении рекламы и образования. Понимает логику коммерческой упаковки подобных партнёрств. Держит в фокусе риск: слишком быстрая коммерциализация подрывает доверие врачей." },
+    { name: "Стратег по репутации и экспертам", desc: "Строит путь «от активного врача до эксперта — спикера конференций».", color: "var(--rose)", bio: "Понимает, как реально формируется репутация среди врачей — через цитируемость и качество ответов, а не лайки. Знает модели репутационных систем и их типичные провалы — геймификацию ради значков, манипуляции рейтингом. Разбирается в организации медицинских конференций и аккредитации на баллы БПР. Знает, как избежать эффекта «начальство назначает экспертов». Понимает связку между растущими экспертами и коммерческим интересом фармы." },
+    { name: "Аналитик ценности и метрик", desc: "Проверяет, что каждая фича реально сработала. Ведёт эту страницу.", color: "var(--slate)", bio: "Строит системы метрик для многосторонних платформ и отличает метрики для галочки от метрик, отражающих реальную ценность. Понимает, что у врачей, фармы и экспертов — разные воронки, которые нельзя мерить одной линейкой. Умеет формулировать гипотезы ценности до разработки и проверять их после запуска. Знает статистическую строгость — когда ещё рано делать выводы. Понимает закон Гудхарта и то, как измерять настоящую ценность B2B-партнёрств." },
+    { name: "Маркетолог роста", desc: "Отвечает за приток и удержание врачей: SEO, email, каналы.", color: "var(--moss)", bio: "Знает каналы, которые реально работают для охвата украинских врачей — ассоциации, вузы, закрытые чаты, профильные СМИ. Понимает механику холодного старта двусторонних платформ через «якорных» пользователей. Знает, что доверие врача строится через рекомендацию коллеги, а не через рекламу. Реалистично оценивает стоимость привлечения узкой профессиональной аудитории. Умеет строить SEO на существующих контентных активах и вести email-базу." },
+    { name: "Технический постановщик", desc: "Переводит решения в конкретные задачи для команды разработки.", color: "var(--graphite)", bio: "Имеет многолетний опыт постановки задач для сложных многосторонних продуктов. Умеет писать задачи для ИИ-агентов разработки предельно однозначно, без места для домысливания. Проектирует продукт по модели «сначала веб, потом мобильные приложения» с общим бэкендом. Понимает, как точные спецификации защищают от хаоса при быстром расширении команды. Умеет отличать задачи в рамках текущей архитектуры от тех, что требуют переделки." }
+  ],
+
+  feed: [
+    { day: "Сегодня, 30 июля", items: [
+      { tag: "Игорь",
+        preview: "Остановил показ метрик «врачи» и «фарма» — рано, платформа ещё не запущена.",
+        full: "Игорь указал, что предложенный набор метрик подходит только для уже запущенной платформы. Дашборд переделан: до запуска показывается прогресс по блокам платформы и темп решений консилиума, а метрики про врачей и фарму включатся автоматически в день реального запуска." },
+      { tag: "Продакт-стратег",
+        preview: "Закрыт вопрос: чем можно подтвердить квалификацию врача при регистрации.",
+        full: "Выяснили, что готового публичного реестра для проверки личного сертификата врача нет — есть только реестр лицензий для медучреждений и ФОП. Решили: основной сигнал — привязка к учреждению или поручительство уже подтверждённого врача, а не сам документ." },
+      { tag: "Аналитик реалий врача",
+        preview: "Предложил проверить, не даёт ли статус Med Expert как провайдера баллов БПР готового пути подтверждения.",
+        full: "Раз Med Expert сам начисляет баллы БПР, есть шанс, что при оформлении баллов через государственную систему личность и специализация врача уже подтверждаются. Открытый вопрос: зарегистрирован ли Med Expert как провайдер уже сейчас, и что именно провайдер получает от системы при начислении баллов." },
+      { tag: "Все роли",
+        preview: "Договорились не останавливаться на «решения нет» — искать дальше и всегда предлагать следующий шаг.",
+        full: "Правило добавлено во все семь ролей: если прямого источника или решения не нашлось, сначала проверить, не меняют ли картину собственные данные или статус Med Expert, попробовать скомбинировать слабые сигналы, и в любом случае закончить не тупиком, а конкретным следующим шагом." }
+    ]}
+  ]
+};
+/* ============================== */
+
+function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; }
+
+const ICONS = {
+  person: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.2" r="4.2"/><ellipse cx="12" cy="21.5" rx="8.4" ry="7.4"/></svg>',
+  people: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8.5" cy="8" r="3.4"/><ellipse cx="8.5" cy="21" rx="7" ry="6.4"/><circle cx="17" cy="9" r="2.6" opacity="0.75"/><ellipse cx="18" cy="22" rx="5.5" ry="5" opacity="0.75"/></svg>'
+};
+
+function roleColor(tagName){
+  const found = DATA.team.find(r => r.name === tagName);
+  return found ? found.color : "var(--graphite)";
+}
+
+function tagAvatarHTML(tagName){
+  if(tagName === "Игорь"){
+    return `<span class="tag-avatar"><img src="${IGOR_PHOTO}" alt="Игорь"></span>`;
+  }
+  return `<span class="tag-avatar" style="background:${roleColor(tagName)}">${ICONS.person}</span>`;
+}
+
+document.getElementById('readiness').innerHTML = DATA.readinessPercent + '<span>%</span>';
+document.getElementById('days-left').textContent = DATA.daysToLaunch;
+document.getElementById('hero-sub').textContent = DATA.heroSub;
+document.getElementById('footer').textContent = 'Обновлено: ' + DATA.updated;
+document.getElementById('dev-icon').innerHTML = ICONS.people;
+const inProgress = DATA.lanes["В работе"] || [];
+document.getElementById('dev-focus').textContent = inProgress.length
+  ? "Сейчас: " + inProgress[0]
+  : "Между задачами";
+
+if(DATA.flag){
+  document.getElementById('flag').style.display='inline-flex';
+  document.getElementById('flag-text').textContent = DATA.flag;
+}
+
+if(DATA.phase === "post-launch"){
+  document.getElementById('metrics-title').textContent = "Как дела у платформы";
+  document.getElementById('metrics-hint').textContent = "";
+}
+
+const metricsWrap = document.getElementById('metrics');
+const activeMetrics = DATA.phase === "post-launch" ? DATA.metricsPostLaunch : DATA.metricsPreLaunch;
+activeMetrics.forEach(m=>{
+  metricsWrap.appendChild(el(`
+    <div class="card">
+      <div class="m-label">${m.label}</div>
+      ${m.value===null ? '<div class="m-dash">—</div>' : `<div class="m-value">${m.value}</div>`}
+      <div class="m-goal">${m.goal}</div>
+    </div>
+  `));
+});
+
+const lanesWrap = document.getElementById('lanes');
+Object.entries(DATA.lanes).forEach(([name, items])=>{
+  const lane = el(`<div class="lane"><h3>${name}</h3></div>`);
+  if(items.length===0){
+    lane.appendChild(el(`<div class="lane-item" style="color:var(--ink-soft)">Пока пусто</div>`));
+  } else {
+    items.forEach(i=> lane.appendChild(el(`<div class="lane-item">${i}</div>`)));
+  }
+  lanesWrap.appendChild(lane);
+});
+
+document.getElementById('marketing').appendChild(el(`<div class="empty">${DATA.marketingEmpty}</div>`));
+
+function avatarHTML(r){
+  if(r.photo){ return `<img src="${r.photo}" alt="${r.name}">`; }
+  return ICONS.person;
+}
+
+const teamWrap = document.getElementById('team');
+DATA.team.forEach((r, idx)=>{
+  const card = el(`
+    <div class="role-card ${(r.chair||r.founder)?'chair':''}">
+      <div class="r-top">
+        <div class="r-avatar" style="background:${r.color||'var(--petrol-deep)'}">${avatarHTML(r)}</div>
+        <div class="r-name">${r.name}</div>
+      </div>
+      <div class="r-desc">${r.desc}</div>
+    </div>
+  `);
+  card.addEventListener('click', ()=> openRoleModal(idx));
+  teamWrap.appendChild(card);
+});
+
+const roleModal = document.getElementById('role-modal');
+function openRoleModal(idx){
+  const r = DATA.team[idx];
+  document.getElementById('modal-avatar').style.background = r.color || 'var(--petrol-deep)';
+  document.getElementById('modal-avatar').innerHTML = avatarHTML(r);
+  document.getElementById('modal-name').textContent = r.name;
+  document.getElementById('modal-bio').textContent = r.bio || r.desc;
+  roleModal.classList.add('open');
+}
+document.getElementById('modal-close').addEventListener('click', ()=> roleModal.classList.remove('open'));
+roleModal.addEventListener('click', (e)=>{ if(e.target === roleModal) roleModal.classList.remove('open'); });
+
+const feedWrap = document.getElementById('feed');
+DATA.feed.forEach(day=>{
+  feedWrap.appendChild(el(`<div class="feed-day">${day.day}</div>`));
+  day.items.forEach(item=>{
+    const card = el(`
+      <div class="feed-item">
+        <span class="tag">${tagAvatarHTML(item.tag)}${item.tag}</span>
+        <div class="feed-body">
+          <div class="feed-text">${item.preview}</div>
+          <div class="feed-full">${item.full || ''}</div>
+          ${item.full ? '<button class="expand-btn">Читать полностью</button>' : ''}
+        </div>
+      </div>
+    `);
+    if(item.full){
+      const btn = card.querySelector('.expand-btn');
+      btn.addEventListener('click', ()=>{
+        card.classList.toggle('open');
+        btn.textContent = card.classList.contains('open') ? 'Свернуть' : 'Читать полностью';
+      });
+    }
+    feedWrap.appendChild(card);
+  });
+});
+</script>
+</body>
+</html>

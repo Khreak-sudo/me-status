@@ -108,6 +108,19 @@
   .lane-item{font-size:13.5px; padding:8px 0; border-top:1px solid var(--line);}
   .lane-item:first-of-type{border-top:none;}
 
+  /* QUESTIONS */
+  .questions{background:var(--paper-card); border:1px solid var(--line); border-radius:16px; padding:6px 16px;}
+  .question-item{display:flex; justify-content:space-between; align-items:center; gap:14px; padding:12px 0; border-top:1px solid var(--line);}
+  .question-item:first-of-type{border-top:none;}
+  .q-text{font-size:13.5px; line-height:1.45; flex:1;}
+  .q-status{
+    flex-shrink:0; display:flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:600; padding:4px 10px; border-radius:100px; white-space:nowrap;
+  }
+  .q-status .dot{width:6px; height:6px; border-radius:50%; background:currentColor;}
+  .q-status.open{background:rgba(201,138,46,0.15); color:var(--amber);}
+  .q-status.resolved{background:rgba(107,123,74,0.15); color:var(--moss);}
+
   /* FEED */
   .feed{background:var(--paper-card); border:1px solid var(--line); border-radius:16px; padding:6px 16px;}
   .feed-day{font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); padding:14px 0 6px;}
@@ -229,6 +242,9 @@
   <div class="section-title"><h2>Бэклог</h2><div class="hint">только утверждённые пункты доходят до разработки</div></div>
   <div class="lanes" id="lanes"></div>
 
+  <div class="section-title"><h2>Вопросы для обсуждения</h2><div class="hint">открытые вопросы и решения консилиума</div></div>
+  <div class="questions" id="questions"></div>
+
   <div class="two-col">
     <div>
       <div class="section-title"><h2>Маркетинговые стратегии</h2></div>
@@ -303,6 +319,13 @@ const DATA = {
       "Формат верификации: через собственный статус провайдера БПР или через ручную проверку"
     ]
   },
+
+  // status: "open" — вопрос открыт, "resolved" — решение принято
+  questions: [
+    { text: "Зарегистрирован ли Med Expert как провайдер БПР уже сейчас и что провайдер получает от системы при начислении баллов", status: "open" },
+    { text: "Формат верификации врача при регистрации: через собственный статус провайдера БПР или через ручную проверку", status: "open" },
+    { text: "Чем можно подтвердить квалификацию врача при регистрации", status: "resolved" }
+  ],
 
   marketingEmpty: "Пока нет ни одной согласованной стратегии — маркетолог роста предложит первую, когда будет проверен реальный канал привлечения.",
 
@@ -398,6 +421,21 @@ Object.entries(DATA.lanes).forEach(([name, items])=>{
   }
   lanesWrap.appendChild(lane);
 });
+
+const questionsWrap = document.getElementById('questions');
+if(DATA.questions.length===0){
+  questionsWrap.appendChild(el(`<div class="question-item" style="color:var(--ink-soft); border-top:none;">Пока вопросов нет</div>`));
+} else {
+  DATA.questions.forEach(q=>{
+    const resolved = q.status === "resolved";
+    questionsWrap.appendChild(el(`
+      <div class="question-item">
+        <div class="q-text">${q.text}</div>
+        <span class="q-status ${resolved?'resolved':'open'}"><span class="dot"></span>${resolved?'Решено':'Вопрос'}</span>
+      </div>
+    `));
+  });
+}
 
 document.getElementById('marketing').appendChild(el(`<div class="empty">${DATA.marketingEmpty}</div>`));
 
